@@ -5,6 +5,8 @@ Estimating the size of a model in memory is useful when trying to determine an a
 
 **Note:** The size estimates provided by this tool are theoretical estimates only, and the total memory used will vary depending on implementation details. PyTorch utilizes a few hundred MB of memory for CUDA initialization, and the use of cuDNN alters memory usage in a manner that is difficult to predict. See [this discussion on the PyTorch Forums](https://discuss.pytorch.org/t/gpu-memory-estimation-given-a-network/1713) for more detail.
 
+[See this blog post](http://jacobkimmel.github.io/pytorch_estimating_model_size/) for an explanation of the size estimation logic.
+
 ## Usage
 
 To use the size estimator, simply import the `SizeEstimator` class, then provide a model and an input size for estimation.
