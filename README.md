@@ -39,7 +39,7 @@ print(se.estimate_size())
 
 # Returns
 # (size in megabytes, size in bits)
-# (206.1505126953125, 1729315840)
+# (408.2833251953125, 3424928768)
 
 print(se.param_bits) # bits taken up by parameters
 print(se.forward_backward_bits) # bits stored for forward and backward
