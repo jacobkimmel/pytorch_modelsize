@@ -17,7 +17,7 @@ class SizeEstimator(object):
 
     def get_parameter_sizes(self):
         '''Get sizes of all parameters in `model`'''
-        mods = list(model.modules())
+        mods = list(self.model.modules())
         for i in range(1,len(mods)):
             m = mods[i]
             p = list(m.parameters())
@@ -31,7 +31,7 @@ class SizeEstimator(object):
     def get_output_sizes(self):
         '''Run sample input through each layer to get output sizes'''
         input_ = Variable(torch.FloatTensor(*self.input_size), volatile=True)
-        mods = list(model.modules())
+        mods = list(self.model.modules())
         out_sizes = []
         for i in range(1, len(mods)):
             m = mods[i]
