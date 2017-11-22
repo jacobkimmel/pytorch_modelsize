@@ -18,10 +18,11 @@ class SizeEstimator(object):
     def get_parameter_sizes(self):
         '''Get sizes of all parameters in `model`'''
         mods = list(self.model.modules())
+        sizes = []
+        
         for i in range(1,len(mods)):
             m = mods[i]
             p = list(m.parameters())
-            sizes = []
             for j in range(len(p)):
                 sizes.append(np.array(p[j].size()))
 
