@@ -3,7 +3,11 @@
 This tool estimates the size of a [PyTorch](https://pytorch.org) model in memory for a given input size.  
 Estimating the size of a model in memory is useful when trying to determine an appropriate batch size, or when making architectural decisions.
 
-**Note:** The size estimates provided by this tool are theoretical estimates only, and the total memory used will vary depending on implementation details. PyTorch utilizes a few hundred MB of memory for CUDA initialization, and the use of cuDNN alters memory usage in a manner that is difficult to predict. See [this discussion on the PyTorch Forums](https://discuss.pytorch.org/t/gpu-memory-estimation-given-a-network/1713) for more detail.
+**Note (1):** `SizeEstimator` is only valid for models where dimensionality changes are exclusively carried out by modules in `model.modules()`.
+
+For example, use of `nn.Functional.max_pool2d` in the `forward()` method of a model prevents `SizeEstimator` from functioning properly. There is no direct means to access dimensionality changes carried out by arbitrary functions in the `forward()` method, such that tracking the size of inputs and gradients to be stored is non-trivial for such models.
+
+**Note (2):** The size estimates provided by this tool are theoretical estimates only, and the total memory used will vary depending on implementation details. PyTorch utilizes a few hundred MB of memory for CUDA initialization, and the use of cuDNN alters memory usage in a manner that is difficult to predict. See [this discussion on the PyTorch Forums](https://discuss.pytorch.org/t/gpu-memory-estimation-given-a-network/1713) for more detail.
 
 [See this blog post](http://jacobkimmel.github.io/pytorch_estimating_model_size/) for an explanation of the size estimation logic.
 
