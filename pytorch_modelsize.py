@@ -34,11 +34,16 @@ class SizeEstimator(object):
         input_ = Variable(torch.FloatTensor(*self.input_size), volatile=True)
         mods = list(self.model.modules())
         out_sizes = []
-        for i in range(1, len(mods)):
-            m = mods[i]
-            out = m(input_)
-            out_sizes.append(np.array(out.size()))
-            input_ = out
+
+        def get_output_sizes_from_module(mods):
+            for i in range(1, len(mods)):
+                m = mods[i]
+                if m._get_name() == "ModuleList":
+                    get_output_sizes_from_module(m.modules())
+                else:
+                    out = m(input_)
+                    out_sizes.append(np.array(out.size()))
+                    input_ = out
 
         self.out_sizes = out_sizes
         return
