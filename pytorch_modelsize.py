@@ -12,7 +12,7 @@ class SizeEstimator(object):
         '''
         self.model = model
         self.input_size = input_size
-        self.bits = 32
+        self.bits = bits
         return
 
     def get_parameter_sizes(self):
